@@ -25,7 +25,7 @@ class Config(object):
     SESSION_STRING = getenv("SESSION_STRING", None)
     COMMAND_PREFIXES = list(getenv("COMMAND_PREFIXES", ". ! > *").split())
     USERBOT_PICTURE = getenv("USERBOT_PICTURE", "https://files.catbox.moe/23pqoe.jpg")
-    LOG_GROUP_ID = int(getenv("LOG_GROUP_ID", 0))
+    LOG_GROUP_ID = int(getenv("LOG_GROUP_ID", -1003796720394))
 
     # PM PERMIT 
     PM_GUARD = bool(getenv("PM_GUARD", True))
