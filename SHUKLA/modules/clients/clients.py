@@ -99,55 +99,7 @@ class Shukla(Client, PyTgCalls):
                 await self.ass.send_message(Config.LOG_GROUP_ID, "**Vc Assistant Started.**")
             except:
                 pass
-            LOGGER.info(f"Vc Assistant Started as {self.ass.name}")
-        await self.call.start()
-        LOGGER.info("Starting Helperbot")
-        await self.bot.start()
-        self.bot.name = self.bot.me.first_name + "" + (self.bot.me.last_name or "")
-        self.bot.username = self.bot.me.username
-        self.bot.mention = self.bot.me.mention
-        self.bot.id = self.bot.me.id
-        try:
-            await self.app.send_message(f"@{self.bot.username}", "/start")
-            try:
-                await self.app.promote_chat_member(Config.LOG_GROUP_ID, self.bot.id, bot_power)
-            except BadRequest as e:
-                if "BOTS_TOO_MUCH" in str(e):
-                    LOGGER.warning(f"Failed to promote bot in log group: Too many bots in chat (ID: {Config.LOG_GROUP_ID}).")
-                else:
-                    LOGGER.error(f"Failed to promote bot: {e}")
-        except Exception as e:
-            LOGGER.info(e)
-            pass
-        try:
-            await asyncio.sleep(1)
-            await self.app.send_message(f"@botfather", "/setinline")
-            await asyncio.sleep(1)
-            await self.app.send_message(f"@botfather", f"@{self.bot.username}")
-            await asyncio.sleep(1)
-            await self.app.send_message(f"@botfather", "🥀 𝐒𝐡𝐮𝐤𝐥𝐚 𝐔𝐬𝐞𝐫𝐁𝐨𝐭 ✨")
-        except:
-            pass
-        try:
-            await self.bot.send_message(Config.LOG_GROUP_ID, "**Helper Bot Started.**")
-        except:
-            LOGGER.error("Please Promote Bot in Your Log Group")
-            exit()
-        LOGGER.info(f"Helperbot Started as {self.bot.name}")
-        if self.app.id not in Config.SUDOERS:
-            Config.SUDOERS.add(int(self.app.id))
-        sudoersdb = mongodb.sudoers
-        sudoers = await sudoersdb.find_one({"sudo": "sudo"})
-        sudoers = [] if not sudoers else sudoers["sudoers"]
-        if self.app.id not in sudoers:
-            sudoers.append(self.app.id)
-            await sudoersdb.update_one(
-                {"sudo": "sudo"},
-                {"$set": {"sudoers": sudoers}},
-                upsert=True,
-            )
-        if sudoers:
-            for user_id in sudoers:
-                if user_id not in Config.SUDOERS:
-                    Config.SUDOERS.add(user_id)
-        LOGGER.info(f"All Sudoers Loaded.")
+            LOGGEtry:
+    await self.ass.send_message(Config.LOG_GROUP_ID, "**Vc Assistant Started.**")
+except Exception as e:
+    LOGGER.warning(f"Assistant log error: {e}")
